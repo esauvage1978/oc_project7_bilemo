@@ -16,8 +16,8 @@ class ProductController extends AbstractFOSRestController
      *     requirements={"id"="\d+"}
      * )
      *
+     * @param string $id
      * @param Product $product
-     *
      * @return Product
      * @Rest\View(StatusCode = 200)
      *
@@ -26,7 +26,8 @@ class ProductController extends AbstractFOSRestController
     public function showAction(string $id, Product $product = null): Product
     {
         if (!$product) {
-            throw new ResourceValidationException(sprintf('Ressource %d not found', $id));
+            throw new ResourceValidationException(
+                sprintf('Ressource %d not found', $id));
         }
 
         return $product;
