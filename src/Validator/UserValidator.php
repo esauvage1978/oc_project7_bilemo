@@ -31,7 +31,7 @@ class UserValidator
      * @param User $user
      * @return bool
      */
-    public function isValide(User $user): bool
+    public function isValid(User $user): bool
     {
         $this->initialiseError($user);
 

@@ -31,7 +31,7 @@ class ProductValidator
      * @param Product $product
      * @return bool
      */
-    public function isValide(Product $product): bool
+    public function isValid(Product $product): bool
     {
         $this->initialiseError($product);
 
@@ -43,7 +43,7 @@ class ProductValidator
      */
     private function initialiseError(Product $product)
     {
-        $this->errors = $this->validator->validate($product);
+        $this->errors = $this->validator->validat($product);
     }
 
     /**
