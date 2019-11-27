@@ -31,6 +31,11 @@ class User
      */
     private $createdAt;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $modifyAt;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -68,6 +73,18 @@ class User
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getModifyAt(): ?\DateTimeInterface
+    {
+        return $this->modifyAt;
+    }
+
+    public function setModifyAt(?\DateTimeInterface $modifyAt): self
+    {
+        $this->modifyAt = $modifyAt;
 
         return $this;
     }
