@@ -1,0 +1,37 @@
+App\Entity\Client:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: compagny
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+              fields: name
+              errorPath: name
+              message: 'This name "{{ value }}" is already in use on this compagny.'
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+              fields: email
+              errorPath: email
+              message: 'This email "{{ value }}" is already in use on this compagny.'
+    properties:
+        compagny:
+            - NotBlank: ~
+            - Length:
+                  min: 3
+                  max: 100
+                  minMessage: 'The compagny "{{ value }}" must be more than 3 characters'
+                  maxMessage: 'The compagny "{{ value }}" can not be more than 100 characters'
+        name:
+            - NotBlank: ~
+            - Length:
+                min: 3
+                max: 100
+                minMessage: 'The name of contact "{{ value }}" must be more than 3 characters'
+                maxMessage: 'The name of contact "{{ value }}" can not be more than 100 characters'
+        email:
+          - Email:
+              message: 'The email "{{ value }}" is not a valid email.'
+          - NotBlank: ~
+          - Length:
+              min: 6
+              max: 255
+              minMessage: 'The Email "{{ value }}" must be more than 6 characters'
+              maxMessage: 'The Email "{{ value }}" can not be more than 100 characters'
+        createdAt:
+          - DateTime: ~
