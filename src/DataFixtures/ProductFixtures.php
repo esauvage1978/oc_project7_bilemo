@@ -33,7 +33,7 @@ class ProductFixtures extends Fixture
             $product->setRef(self::DATA[$i]['ref']);
             $product->setName(self::DATA[$i]['name']);
 
-            if (!$this->productValidator->isValide($product)) {
+            if (!$this->productValidator->isValid($product)) {
                 throw  new \InvalidArgumentException($this->productValidator->getErrors($product));
             }
 

@@ -28,7 +28,7 @@ class ClientValidator
      * @param Client $client
      * @return bool
      */
-    public function isValide(Client $client): bool
+    public function isValid(Client $client): bool
     {
         $this->initialiseError($client);
 
