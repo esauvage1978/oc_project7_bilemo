@@ -6,6 +6,8 @@ use App\Entity\User;
 use App\Exception\ResourceValidationException;
 use App\Repository\UserRepository;
 use App\Representation\Users;
+use App\Security\UserVoter;
+use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcherInterface;
@@ -32,6 +34,8 @@ class UserController extends AbstractFOSRestController
             throw new ResourceValidationException(
                 sprintf('Ressource %d not found', $id));
         }
+
+        $this->denyAccessUnlessGranted(UserVoter::SHOW, $user);
 
         return $user;
     }
@@ -82,5 +86,36 @@ class UserController extends AbstractFOSRestController
         );
 
         return new Users($pager,$paramFetcher->get('wordsearch'));
+    }
+
+    /**
+     * @Rest\Delete(
+     *     path = "/users/{id}",
+     *     name = "api_user_delete",
+     *     requirements = {"id"="\d+"}
+     * )
+     * @Rest\View( StatusCode = 204)
+     * @param int $id
+     * @param UserRepository $repo
+     * @param EntityManagerInterface $manager
+     * @return string
+     * @throws ResourceValidationException
+     *
+     *
+     */
+    public function deleteAction(int $id,  UserRepository $repo,  EntityManagerInterface $manager)
+    {
+        $user=$repo->findOneBy(['id'=>$id]);
+
+
+        if (!$user) {
+            $message = 'No users match the number ' . $id;
+            throw new ResourceValidationException($message);
+        }
+
+        $this->denyAccessUnlessGranted(UserVoter::DELETE, $user);
+
+        $manager->remove($user);
+        $manager->flush();
     }
 }
