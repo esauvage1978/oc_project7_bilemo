@@ -7,6 +7,7 @@ use App\Validator\ClientValidator;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class ClientFixtures extends Fixture
 {
@@ -15,9 +16,12 @@ class ClientFixtures extends Fixture
      */
     private $validator;
 
-    public function __construct(ClientValidator $validator)
+    private $passwordEncoder;
+
+    public function __construct(ClientValidator $validator, UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->validator = $validator;
+        $this->passwordEncoder = $passwordEncoder;
     }
 
     public function load(ObjectManager $manager)
@@ -31,7 +35,8 @@ class ClientFixtures extends Fixture
                 ->setCreatedAt($faker->dateTimeBetween($startDate = '-3 years', $endDate = 'now', $timezone = 'Europe/Paris'))
                 ->setEmail(self::DATA[$i]['email'])
                 ->setName(self::DATA[$i]['name'])
-                ->setPassword(self::DATA[$i]['password'])
+                ->setPassword($this->passwordEncoder->encodePassword(
+                    $client,self::DATA[$i]['password']))
                 ->setCompagny(self::DATA[$i]['compagny']);
 
             if (!$this->validator->isValide($client)) {
@@ -50,7 +55,9 @@ class ClientFixtures extends Fixture
                 ->setCompagny($faker->company)
                 ->setEmail($faker->companyEmail)
                 ->setName($faker->userName)
-                ->setPassword($faker->password);
+                ->setPassword($this->passwordEncoder->encodePassword(
+                    $client,
+                    $faker->password));
 
             if (!$this->validator->isValide($client)) {
                 throw  new \InvalidArgumentException($this->validator->getErrors($client));
