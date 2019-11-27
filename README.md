@@ -45,3 +45,5 @@ GET /api/products
 GET /api/products/{id}
 
 GET /api/users/{id}
+
+GET /api/users
