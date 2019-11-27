@@ -1,7 +1,13 @@
 App\Entity\User:
     constraints:
-        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: username
-        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: email
+      - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+          fields: [username, client]
+          errorPath: usernane
+          message: 'The username "{{ value }}" is already in use on this compagny.'
+      - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+          fields: [email, client]
+          errorPath: email
+          message: 'The email  "{{ value }}" is already in use on this compagny.'
     properties:
         username:
             - NotBlank: ~

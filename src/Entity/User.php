@@ -36,6 +36,13 @@ class User
      */
     private $modifyAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="users")
+     * @ORM\JoinColumn(nullable=false)
+     *
+     */
+    private $client;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -85,6 +92,18 @@ class User
     public function setModifyAt(?\DateTimeInterface $modifyAt): self
     {
         $this->modifyAt = $modifyAt;
+
+        return $this;
+    }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Client $client): self
+    {
+        $this->client = $client;
 
         return $this;
     }
