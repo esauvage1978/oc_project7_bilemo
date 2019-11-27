@@ -47,3 +47,5 @@ GET /api/products/{id}
 GET /api/users/{id}
 
 GET /api/users
+
+DELETE /api/users/{id}
