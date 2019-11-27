@@ -43,7 +43,7 @@ class ProductValidator
      */
     private function initialiseError(Product $product)
     {
-        $this->errors = $this->validator->validat($product);
+        $this->errors = $this->validator->validate($product);
     }
 
     /**
