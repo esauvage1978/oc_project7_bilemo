@@ -18,6 +18,8 @@ class UserValidator
      */
     private $errors;
 
+
+
     /**
      * ProductValidator constructor.
      * @param ValidatorInterface $validator

@@ -8,8 +8,7 @@ use App\Repository\UserRepository;
 use App\Representation\Users;
 use App\Security\UserVoter;
 use App\Service\UserManager;
-use App\Validator\UserValidator;
-use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcherInterface;
@@ -138,6 +137,31 @@ class UserController extends AbstractFOSRestController
 
         $request->get('email') &&
         $user->setEmail($request->get('email')) ;
+
+        if(!$manager->update($user)  ) {
+            $message = 'The JSON sent contains invalid data. ' . $manager->getErrors($user);
+            throw new ResourceValidationException($message);
+        }
+
+        return $user;
+    }
+
+    /**
+     * @Rest\Post("/users",
+     *     name="api_user_create")
+     * @Rest\View(StatusCode = 201)
+     * @ParamConverter("user", converter="fos_rest.request_body")
+     *
+     * @param User $user
+     * @param  UserManager $manager
+     *
+     * @return User
+     *
+     * @throws ResourceValidationException Error to create User
+     *
+     */
+    public function createAction(User $user, UserManager $manager)
+    {
 
         if(!$manager->update($user)  ) {
             $message = 'The JSON sent contains invalid data. ' . $manager->getErrors($user);
