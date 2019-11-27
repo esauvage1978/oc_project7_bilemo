@@ -34,7 +34,7 @@ class UserFixtures extends Fixture  implements DependentFixtureInterface
                 ->setUsername(self::DATA[$i]['username'])
                 ->setClient($this->getReference('client-0'));
 
-            if (!$this->validator->isValide($user)) {
+            if (!$this->validator->isValid($user)) {
                 throw  new \InvalidArgumentException($this->validator->getErrors($user));
             }
 
@@ -51,7 +51,7 @@ class UserFixtures extends Fixture  implements DependentFixtureInterface
                 ->setUsername($faker->userName)
                 ->setClient($this->getReference('client-' . mt_rand(0, 9+count(ClientFixtures::DATA))));
 
-            if (!$this->validator->isValide($user)) {
+            if (!$this->validator->isValid($user)) {
                 throw  new \InvalidArgumentException($this->validator->getErrors($user));
             }
 

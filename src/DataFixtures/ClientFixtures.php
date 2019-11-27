@@ -39,7 +39,7 @@ class ClientFixtures extends Fixture
                     $client,self::DATA[$i]['password']))
                 ->setCompagny(self::DATA[$i]['compagny']);
 
-            if (!$this->validator->isValide($client)) {
+            if (!$this->validator->isValid($client)) {
                 throw  new \InvalidArgumentException($this->validator->getErrors($client));
             }
 
@@ -59,7 +59,7 @@ class ClientFixtures extends Fixture
                     $client,
                     $faker->password));
 
-            if (!$this->validator->isValide($client)) {
+            if (!$this->validator->isValid($client)) {
                 throw  new \InvalidArgumentException($this->validator->getErrors($client));
             }
 

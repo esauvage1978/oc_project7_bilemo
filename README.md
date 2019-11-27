@@ -49,3 +49,5 @@ GET /api/users/{id}
 GET /api/users
 
 DELETE /api/users/{id}
+
+PUT /api/users/{id}
