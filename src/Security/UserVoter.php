@@ -13,7 +13,6 @@ class UserVoter extends Voter
     const UPDATE = 'update';
     const DELETE = 'delete';
     const CREATE = 'create';
-    const SHOW = 'show';
 
     private $security;
 
@@ -24,7 +23,7 @@ class UserVoter extends Voter
 
     protected function supports($attribute, $subject)
     {
-        if (!in_array($attribute, [self::CREATE, self::UPDATE, self::DELETE, self::SHOW])) {
+        if (!in_array($attribute, [self::CREATE, self::UPDATE, self::DELETE])) {
             return false;
         }
 
@@ -53,8 +52,6 @@ class UserVoter extends Voter
                 return $this->canCreate($user, $client);
             case self::DELETE:
                 return $this->canDelete($user, $client);
-            case self::SHOW:
-                return $this->canShow($user, $client);
         }
 
         throw new \LogicException('This code should not be reached!');
@@ -79,8 +76,4 @@ class UserVoter extends Voter
         return $client === $user->getClient();
     }
 
-    private function canShow(User $user, Client $client)
-    {
-        return $client === $user->getClient();
-    }
 }

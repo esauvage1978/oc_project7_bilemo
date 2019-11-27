@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Validator\UserValidator;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Core\Security;
 
 class UserManager
 {
@@ -20,10 +21,16 @@ class UserManager
      */
     private $validator;
 
-    public function __construct(EntityManagerInterface $manager, UserValidator $validator)
+    /**
+     * @var Security
+     */
+    private $securityContext;
+
+    public function __construct(EntityManagerInterface $manager, UserValidator $validator, Security $securityContext)
     {
         $this->manager = $manager;
         $this->validator = $validator;
+        $this->securityContext = $securityContext;
     }
 
     public function update(User $entity): bool
@@ -48,6 +55,10 @@ class UserManager
             $user->setModifyAt(new \DateTime());
         }
 
+        if(empty( $user->getClient())) {
+            $user->setClient( $this->securityContext->getToken()->getUser());
+        }
+        
         return true;
     }
 
