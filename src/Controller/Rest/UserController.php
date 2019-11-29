@@ -97,6 +97,7 @@ class UserController extends AbstractFOSRestController
      *     requirements = {"id"="\d+"}
      * )
      * @Rest\View( StatusCode = 204)
+     * @param string $id
      * @param User $user
      * @param UserRepository $repo
      * @param UserManager $manager
@@ -105,8 +106,12 @@ class UserController extends AbstractFOSRestController
      *
      *
      */
-    public function deleteAction(User $user,  UserRepository $repo,  UserManager $manager)
+    public function deleteAction( string $id, UserRepository $repo,  UserManager $manager, User $user=null)
     {
+        if (!$user) {
+            throw new ResourceValidationException(
+                sprintf('Ressource %d not found', $id));
+        }
         $this->denyAccessUnlessGranted(UserVoter::DELETE, $user);
 
         $manager->remove($user);

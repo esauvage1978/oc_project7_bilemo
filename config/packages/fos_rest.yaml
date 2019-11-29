@@ -13,7 +13,12 @@ fos_rest:
     validate: true
     validation_errors_argument: violations
   exception:
-    enabled: false
+    enabled: true
+    codes:
+      { App\Exception\ResourceValidationException: 400 }
+    messages:
+      { App\Exception\ResourceValidationException: true }
+    exception_controller: 'fos_rest.exception.controller:showAction'
   view:
     mime_types:
       json: ['application/json']
