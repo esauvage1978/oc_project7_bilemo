@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Hateoas\Configuration\Annotation as Hateoas;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
+use Swagger\Annotations as SWG;
+use Nelmio\ApiDocBundle\Annotation\Model;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -47,35 +49,35 @@ class User
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     *
+     * @SWG\Property(type="integer")
      * @Expose
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     *
+     * @SWG\Property(type="string", maxLength=255)
      * @Expose
      */
     private $username;
 
     /**
      * @ORM\Column(type="string", length=255)
-     *
+     * @SWG\Property(type="string", maxLength=255)
      * @Expose
      */
     private $email;
 
     /**
      * @ORM\Column(type="datetime")
-     *
+     * @SWG\Property(type="datetime")
      * @Expose
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     *
+     * @SWG\Property(type="datetime")
      * @Expose
      */
     private $modifyAt;
@@ -83,7 +85,7 @@ class User
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="users")
      * @ORM\JoinColumn(nullable=false)
-     *
+     * @SWG\Property(ref=@Model(type=Client::class))
      */
     private $client;
 

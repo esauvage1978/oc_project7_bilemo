@@ -4,9 +4,14 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Hateoas\Configuration\Annotation as Hateoas;
+use Swagger\Annotations as SWG;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
+ *
+ * @ExclusionPolicy("all")
  *
  * @Hateoas\Relation(
  *      "self",
@@ -23,31 +28,48 @@ class Product
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @SWG\Property(type="integer")
+     * @Expose
+     *
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @SWG\Property(type="string", maxLength=50)
+     * @Expose
+     *
      */
     private $name;
 
     /**
      * @ORM\Column(type="text")
+     * @SWG\Property(type="string   ")
+     * @Expose
      */
     private $content;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @SWG\Property(type="integer")
+     * @Expose
+     *
      */
     private $weight;
 
     /**
      * @ORM\Column(type="datetime")
+     * @SWG\Property(type="datetime")
+     * @Expose
+     *
      */
     private $availableAt;
 
     /**
      * @ORM\Column(type="string", length=20)
+     * @SWG\Property(type="string", maxLength=20)
+     * @Expose
+     *
      */
     private $ref;
 
