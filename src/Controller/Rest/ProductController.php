@@ -12,6 +12,7 @@ use FOS\RestBundle\Request\ParamFetcherInterface;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Swagger\Annotations as SWG;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 
 class ProductController extends AbstractFOSRestController
 {
@@ -28,6 +29,9 @@ class ProductController extends AbstractFOSRestController
      * @Rest\View(StatusCode = 200)
      *
      * @throws ResourceValidationException
+     *
+     * @Cache(expires="tomorrow")
+     *
      * @SWG\Response(
      *     response=200,
      *     description="Returns product details",
@@ -92,6 +96,8 @@ class ProductController extends AbstractFOSRestController
      *     default="1",
      *     description="The pagination offset"
      * )
+     *
+     * @Cache(expires="tomorrow")
      *
      * @Rest\View
      * @param ProductRepository $productRepository

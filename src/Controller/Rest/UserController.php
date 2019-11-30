@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Swagger\Annotations as SWG;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 
 class UserController extends AbstractFOSRestController
 {
@@ -53,6 +54,8 @@ class UserController extends AbstractFOSRestController
      * @param UserRepository $userRepository
      * @param ParamFetcherInterface $paramFetcher
      * @return Users
+     *
+     * @Cache(expires="tomorrow")
      *
      * @SWG\Response(
      *     response=200,
@@ -104,6 +107,8 @@ class UserController extends AbstractFOSRestController
      * @Rest\View(StatusCode = 200)
      *
      * @throws ResourceValidationException
+     *
+     * @Cache(expires="tomorrow")
      *
      * @SWG\Response(
      *     response=200,
