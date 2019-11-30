@@ -12,6 +12,7 @@ use FOS\RestBundle\Request\ParamFetcherInterface;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Swagger\Annotations as SWG;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 
 class ProductController extends AbstractFOSRestController
 {
@@ -28,9 +29,12 @@ class ProductController extends AbstractFOSRestController
      * @Rest\View(StatusCode = 200)
      *
      * @throws ResourceValidationException
+     *
+     * @Cache(expires="tomorrow")
+     *
      * @SWG\Response(
      *     response=200,
-     *     description="Returns product details",
+     *     description="Returns product details. Data is cached for 1 day",
      *     @SWG\Schema(
      *         type="array",
      *         example={"id": 10,"name": "bipbop","content": "description du bipbop","weight": 10,"available_at": "10/10/2019","ref": "bb","_links": {"self": {"href": "http://bilemo/api/products/10"}}},
@@ -93,6 +97,8 @@ class ProductController extends AbstractFOSRestController
      *     description="The pagination offset"
      * )
      *
+     * @Cache(expires="tomorrow")
+     *
      * @Rest\View
      * @param ProductRepository $productRepository
      * @param ParamFetcherInterface $paramFetcher
@@ -100,7 +106,7 @@ class ProductController extends AbstractFOSRestController
      *
      * @SWG\Response(
      *     response=200,
-     *     description="Returns a list of all products",
+     *     description="Returns a list of all products. Data is cached for 1 day",
      *     @SWG\Schema(
      *         type="array",
      *         @SWG\Items(ref=@Model(type=Product::class))

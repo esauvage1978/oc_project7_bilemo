@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Swagger\Annotations as SWG;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 
 class UserController extends AbstractFOSRestController
 {
@@ -54,9 +55,11 @@ class UserController extends AbstractFOSRestController
      * @param ParamFetcherInterface $paramFetcher
      * @return Users
      *
+     * @Cache(expires="tomorrow")
+     *
      * @SWG\Response(
      *     response=200,
-     *     description="Returns a list of all users related to an authentified client",
+     *     description="Returns a list of all users related to an authentified client. Data is cached for 1 day.",
      *     @SWG\Schema(
      *         type="array",
      *         @SWG\Items(ref=@Model(type=User::class))
@@ -105,9 +108,11 @@ class UserController extends AbstractFOSRestController
      *
      * @throws ResourceValidationException
      *
+     * @Cache(expires="tomorrow")
+     *
      * @SWG\Response(
      *     response=200,
-     *     description="Returns user details",
+     *     description="Returns user details. Data is cached for 1 day",
      *     @SWG\Schema(
      *         type="array",
      *         @SWG\Items(ref=@Model(type=User::class))
@@ -214,7 +219,7 @@ class UserController extends AbstractFOSRestController
      *
      * @SWG\Response(
      *     response=201,
-     *     description="Return user modified ",
+     *     description="Return user modified. ",
      *     @SWG\Schema(
      *         type="array",
      *         @SWG\Items(ref=@Model(type=User::class)),
