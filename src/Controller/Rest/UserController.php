@@ -59,7 +59,7 @@ class UserController extends AbstractFOSRestController
      *
      * @SWG\Response(
      *     response=200,
-     *     description="Returns a list of all users related to an authentified client",
+     *     description="Returns a list of all users related to an authentified client. Data is cached for 1 day.",
      *     @SWG\Schema(
      *         type="array",
      *         @SWG\Items(ref=@Model(type=User::class))
@@ -112,7 +112,7 @@ class UserController extends AbstractFOSRestController
      *
      * @SWG\Response(
      *     response=200,
-     *     description="Returns user details",
+     *     description="Returns user details. Data is cached for 1 day",
      *     @SWG\Schema(
      *         type="array",
      *         @SWG\Items(ref=@Model(type=User::class))
@@ -219,7 +219,7 @@ class UserController extends AbstractFOSRestController
      *
      * @SWG\Response(
      *     response=201,
-     *     description="Return user modified ",
+     *     description="Return user modified. ",
      *     @SWG\Schema(
      *         type="array",
      *         @SWG\Items(ref=@Model(type=User::class)),

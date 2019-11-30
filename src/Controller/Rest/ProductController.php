@@ -34,7 +34,7 @@ class ProductController extends AbstractFOSRestController
      *
      * @SWG\Response(
      *     response=200,
-     *     description="Returns product details",
+     *     description="Returns product details. Data is cached for 1 day",
      *     @SWG\Schema(
      *         type="array",
      *         example={"id": 10,"name": "bipbop","content": "description du bipbop","weight": 10,"available_at": "10/10/2019","ref": "bb","_links": {"self": {"href": "http://bilemo/api/products/10"}}},
@@ -106,7 +106,7 @@ class ProductController extends AbstractFOSRestController
      *
      * @SWG\Response(
      *     response=200,
-     *     description="Returns a list of all products",
+     *     description="Returns a list of all products. Data is cached for 1 day",
      *     @SWG\Schema(
      *         type="array",
      *         @SWG\Items(ref=@Model(type=Product::class))
