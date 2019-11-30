@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
+use Swagger\Annotations as SWG;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ClientRepository")
@@ -20,6 +21,7 @@ class Client  implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @SWG\Property(type="integer")
      * @Expose
      *
      */
@@ -27,19 +29,25 @@ class Client  implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @SWG\Property(type="string", maxLength=255)
      * @Expose
+     *
      */
     private $compagny;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @SWG\Property(type="string", maxLength=255)
      * @Expose
+     *
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @SWG\Property(type="string", maxLength=255)
      * @Expose
+     *
      */
     private $email;
 
