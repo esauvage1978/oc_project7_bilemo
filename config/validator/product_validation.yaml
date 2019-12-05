@@ -1,0 +1,28 @@
+App\Entity\Product:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: ref
+    properties:
+        name:
+            - NotBlank: ~
+            - Length:
+                  min: 3
+                  max: 50
+                  minMessage: 'Name must be more than 3 characters'
+                  maxMessage: 'Name can not be more than 50 characters'
+        ref:
+            - NotBlank: ~
+            - Length:
+                  min: 3
+                  max: 20
+                  minMessage: 'Reference must be more than 3 characters'
+                  maxMessage: 'Reference can not be more than 100 characters'
+        weight:
+          - Range:
+              min: 10
+              max: 1000
+              minMessage: 'You must be at least {{ limit }} g to enter'
+              maxMessage: 'You cannot be taller than {{ limit }} g to enter'
+        content:
+          - NotBlank: ~
+        availableAt:
+          - DateTime: ~
