@@ -1,5 +1,22 @@
 # oc_project7_bilemo
-##
+
+### Openclassrooms / Projet 7 : Créez un web service exposant une API
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d35805b70ab545b29a19463240a8c00f)](https://www.codacy.com/manual/esauvage1978/oc_project7_bilemo?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=esauvage1978/oc_project7_bilemo&amp;utm_campaign=Badge_Grade)
+
+
+## Getting Started
+
+1. copy repository `git clone https://github.com/esauvage1978/oc_project7_bilemo.git`
+2. update "require": "4.3.*" of section Symfony in composer.json
+3. `composer install`
+4. update "require": "4.4.*" of section Symfony in composer.json
+5. `composer update`
+6. Copy et rename `.env.local` to `.env` and  configure BDD connect on `.env` file and dev environnement (APP_ENV=dev)
+7. Create database `php bin/console doctrine:database:create`
+8. Create sql file  `php bin/console make:migration`
+9. Migrate table on database  `php bin/console doctrine:migrations:migrate`
+10. (for test) load fixtures into the database `php bin/console doctrine:fixtures:load`
+11. configure the producion environnement in `.env` file (APP_ENV=prod)
 
 You can see the documentation to the url : GET api/doc
 ##
